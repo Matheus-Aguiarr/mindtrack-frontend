@@ -7,6 +7,7 @@ import { Button } from './ui/button';
 import { Eye, EyeOff, KeyRoundIcon, Mail } from 'lucide-react'
 import { InputWithIcon } from './ui/input-with-icon';
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 
 
 const schema = z.object({
@@ -18,6 +19,7 @@ type FormData = z.infer<typeof schema>;
 
 export function LoginForm() { 
     const [showPassword, setShowPassword] = useState(false);
+    const navigate = useNavigate();
 
     const toggleShowPassword = () => {
         setShowPassword((prev) => !prev);
@@ -30,7 +32,12 @@ export function LoginForm() {
     const { mutate, isPending, error } = useAuthLogin();
 
     const onSubmit = (data: FormData) => {
-        mutate(data);
+        mutate(data, {
+            onSuccess: (data) => {
+                localStorage.setItem("token", data.token); 
+                navigate("/dashboard");
+            }
+        });
     }
 
 
@@ -65,7 +72,7 @@ export function LoginForm() {
                 {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
             </div>
 
-            {error && <p className='text-sm text-red-500'>{error.message}</p>}
+            {error && <p className='text-sm text-red-500'>Erro ao realizar login.</p>}
 
             <Button type="submit" disabled={isPending} className='w-full'>
                 {isPending ? "Entrando..." : "Entrar"}
