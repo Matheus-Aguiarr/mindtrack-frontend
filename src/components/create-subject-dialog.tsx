@@ -41,7 +41,7 @@ export function CreateSubjectDialog() {
     return ( 
         <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="ml-auto flex gap-2 mb-10 cursor-pointer">
+        <Button className="ml-auto flex gap-2 mb-10 cursor-pointer bg-yellow-500 shadow-lg shadow-yellow-500/20 hover:bg-yellow-600">
           <Plus size={18} />
           Nova Matéria
         </Button>
@@ -74,7 +74,7 @@ export function CreateSubjectDialog() {
             <p className="text-sm text-red-500">{error.message}</p>
           )}
 
-          <Button type="submit" disabled={isPending} className="w-full">
+          <Button type="submit" disabled={isPending} className="w-full bg-yellow-500 shadow-lg shadow-yellow-500/20 hover:bg-yellow-600 cursor-pointer">
             {isPending ? "Criando..." : "Criar Matéria"}
           </Button>
         </form>

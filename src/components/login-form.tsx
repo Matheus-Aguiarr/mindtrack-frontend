@@ -74,7 +74,7 @@ export function LoginForm() {
 
             {error && <p className='text-sm text-red-500'>Erro ao realizar login.</p>}
 
-            <Button type="submit" disabled={isPending} className='w-full'>
+            <Button type="submit" disabled={isPending} className='w-full bg-yellow-500 hover:bg-yellow-600 shadow-lg shadow-yellow-500/25 cursor-pointer'>
                 {isPending ? "Entrando..." : "Entrar"}
             </Button>
         </form>

@@ -62,7 +62,7 @@ export function CreateGoalDialog({ subject_id }: Props) {
     return (
         <Dialog open={open} onOpenChange={setOpen}>
       <DialogTrigger asChild>
-        <Button className="ml-auto" variant={"secondary"}>
+        <Button className="ml-auto cursor-pointer bg-yellow-500 shadow-lg shadow-yellow-500/20 hover:bg-yellow-600" variant={"secondary"}>
             <Plus size={18}/>
             Novo Objetivo
         </Button>
@@ -108,7 +108,7 @@ export function CreateGoalDialog({ subject_id }: Props) {
 
           {error && <p className="text-sm text-red-500">{error.message}</p>}
 
-          <Button type="submit" disabled={isPending} className="w-full">
+          <Button type="submit" disabled={isPending} className="w-full cursor-pointer bg-yellow-500 shadow-lg shadow-yellow-500/20 hover:bg-yellow-600">
             {isPending ? "Criando..." : "Criar Objetivo"}
           </Button>
         </form>

@@ -3,14 +3,17 @@ import { Badge } from '@/components/ui/badge'
 import { Skeleton } from "@/components/ui/skeleton";
 import { useGetSubjectById } from "@/http/use-get-subject-by-id";
 import { Separator } from "@/components/ui/separator";
-import { useParams } from "react-router-dom"
+import { useNavigate, useParams } from "react-router-dom"
 import { CreateGoalDialog } from "@/components/create-goal-dialog";
 import { CreateNoteDialog } from "@/components/create-note-dialog";
+import { ArrowLeft } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
 export function SubjectDetails() {
     const { id } = useParams(); // pega o id dos parametros
     const numericId = id ? Number(id) : undefined;
     const { data: subject, isLoading, error} = useGetSubjectById(numericId); 
+    const navigate = useNavigate();
 
     if (isLoading) { 
         return ( 
@@ -20,6 +23,10 @@ export function SubjectDetails() {
                 <Skeleton className="h-32 w-full" /> 
             </div>
         )
+    }
+
+    function handleGoBack() { 
+        navigate("/dashboard");
     }
 
     if (error) {
@@ -35,8 +42,9 @@ export function SubjectDetails() {
 
 
     return ( 
-        <div className="max-w-5xl mx-auto px-4 py-10 space-y-8">
+        <div className="max-w-5xl mx-auto px-4 py-10 space-y-8">    
             <div>
+                <ArrowLeft size={25} onClick={handleGoBack}  className="cursor-pointer"/> 
                 <h1 className="text-3xl font-bold text-center">
                     {subject.name}
                 </h1>
@@ -75,6 +83,19 @@ export function SubjectDetails() {
                                     <p className="text-xs text-right text-muted-foreground">
                                         até {goal.deadline}
                                     </p>
+                                    {goal.done ? ( 
+                                        <Button className="bg-amber-500 hover:bg-amber-600">
+                                            Pendente
+                                        </Button>
+                                    ) : ( 
+                                    <Button className="bg-green-400 hover:bg-green-500 cursor-pointer mr-2">
+                                        Feito
+                                    </Button>
+
+                                    )}
+                                    <Button className="cursor-pointer bg-red-400 hover:bg-red-500">
+                                        Excluir
+                                    </Button>
                                 </CardContent>
                             </Card>
                         ))}
