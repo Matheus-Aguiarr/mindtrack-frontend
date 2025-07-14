@@ -8,6 +8,7 @@ import { Eye, EyeOff, KeyRoundIcon, Mail } from 'lucide-react'
 import { InputWithIcon } from './ui/input-with-icon';
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Checkbox } from './ui/checkbox';
 
 
 const schema = z.object({
@@ -70,6 +71,11 @@ export function LoginForm() {
                     }
                 />
                 {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
+            </div>
+
+            <div>
+                <Checkbox className='mr-2'/>
+                Lembrar-me
             </div>
 
             {error && <p className='text-sm text-red-500'>Erro ao realizar login.</p>}

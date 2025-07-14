@@ -7,10 +7,12 @@ import { useNavigate, useParams } from "react-router-dom"
 import { CreateGoalDialog } from "@/components/create-goal-dialog";
 import { CreateNoteDialog } from "@/components/create-note-dialog";
 import { ArrowLeft } from "lucide-react";
-import { Button } from "@/components/ui/button";
 import { ConfirmMarkDoneDialog } from "@/components/confirm-mark-done-dialog";
 import { ConfirmDeleteGoalDialog } from "@/components/confirm-delete-goal-dialog";
 import { ConfirmPedingGoalDialog } from "@/components/confirm-pending-goal-dialog";
+import { Button } from "@/components/ui/button";
+import { ConfirmEditNoteDialog } from "@/components/confirm-edit-note-dialog";
+import { ConfirmDeleteNoteDialog } from "@/components/confirm-delete-note-dialog";
 
 export function SubjectDetails() {
     const { id } = useParams(); // pega o id dos parametros
@@ -86,8 +88,8 @@ export function SubjectDetails() {
                 ) : ( 
                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"> 
                         {subject.goals.map((goal) => ( 
-                            <Card key={goal.id} className="rounded-2xl p-0.5">
-                                <CardContent className="p-4 space-y-1">
+                            <Card key={goal.id} className="rounded-2xl min-h-[180px] p-0.5">
+                                <CardContent className="p-4 flex flex-col justify-between h-full">
                                     <h3 className="font-semibold text-lg">
                                         {goal.title}
                                     </h3>
@@ -132,13 +134,17 @@ export function SubjectDetails() {
         ) : (
           <div className="space-y-4">
             {subject.notes.map((note, i) => (
-              <Card key={i} className="rounded-2xl">
-                <CardContent className="p-4 space-y-1">
+              <Card key={i} className="rounded-2xl min-h-[150px]">
+                <CardContent className=" flex flex-col justify-between ">
                   <h3 className="font-semibold text-lg">{note.title}</h3>
-                  <p className="text-sm text-muted-foreground">{note.content}</p>
-                  <p className="text-xs text-right text-muted-foreground">
-                    Criado em {note.created_at}
-                  </p>
+                  <p className="text-sm text-muted-foreground break-words">{note.content}</p>
+                  <div className="flex flex-row items-center justify-end gap-3  mt-5">
+                    <ConfirmEditNoteDialog subjectId={subject.id} note={note} noteId={note.id}/>
+                    <ConfirmDeleteNoteDialog subjectId={subject.id} noteId={note.id} /> 
+                    <p className="text-xs text-right text-muted-foreground">
+                        Criado em {note.created_at}
+                    </p>
+                  </div>
                 </CardContent>
               </Card>
             ))}

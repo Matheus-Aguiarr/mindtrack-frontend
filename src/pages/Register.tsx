@@ -4,7 +4,7 @@ import logo from "../assets/logo-mindtrack.png"
 
 export function RegisterPage() {
     return ( 
-        <div className="min-h-screen flex items-center justify-center ">
+        <div className="min-h-screen m-2 flex items-center justify-center ">
             <div className=" p-6 rounded-2xl shadow-md w-full max-w-md bg-accent">
                 <img src={logo} alt="" className="w-[50px] h-[50px] rounded-md m-auto my-5"/>
                 <h1 className="  text-2xl font-bold mb-4 text-center">

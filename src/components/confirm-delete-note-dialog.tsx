@@ -1,16 +1,14 @@
-import { useMarkPedingGoal } from "@/http/use-mark-pending-goal";
+import { useDeleteNote } from "@/http/use-delete-note";
 import { AlertDialog, AlertDialogAction, AlertDialogCancel, AlertDialogContent, AlertDialogDescription, AlertDialogFooter, AlertDialogHeader, AlertDialogTitle, AlertDialogTrigger } from "./ui/alert-dialog";
 import { Button } from "./ui/button";
 
-
 interface Props { 
-    goalId: number; 
+    noteId: number; 
     subjectId: number; 
 }
 
-export function ConfirmPedingGoalDialog({goalId, subjectId}: Props) { 
-    const {mutate, isPending} = useMarkPedingGoal(goalId, subjectId);
-
+export function ConfirmDeleteNoteDialog({noteId, subjectId}: Props) { 
+    const { mutate, isPending } = useDeleteNote(noteId, subjectId);
     const handleConfirm = () => {
         mutate();
     }
@@ -18,29 +16,29 @@ export function ConfirmPedingGoalDialog({goalId, subjectId}: Props) {
     return ( 
         <AlertDialog>
             <AlertDialogTrigger asChild>
-                <Button className="cursor-pointer bg-amber-500 mr-2 hover:bg-amber-600">
-                    Pendente
+                <Button className="bg-red-400 cursor-pointer hover:bg-red-500">
+                    Excluir
                 </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
-                <AlertDialogHeader>
+                <AlertDialogHeader> 
                     <AlertDialogTitle>
-                        Tem certeza?
+                        Tem certeza? 
                     </AlertDialogTitle>
                     <AlertDialogDescription>
-                        Você está marcando esse objetivo como pendente. Essa ação pode ser desfeita logo após a confirmação. 
+                        Você está excluindo essa anotação. Essa ação não pode ser desfeita. 
                     </AlertDialogDescription>
                 </AlertDialogHeader>
                 <AlertDialogFooter>
-                    <AlertDialogCancel className="cursor-pointer">
+                    <AlertDialogCancel>
                         Cancelar
                     </AlertDialogCancel>
                     <AlertDialogAction
                         onClick={handleConfirm}
+                        className="bg-yellow-500 shadow-lg shadow-yellow-500/20 cursor-pointer hover:bg-yellow-600"
                         disabled={isPending}
-                        className="cursor-pointer bg-yellow-500 shadow-lg shadow-yellow-500/20 hover:bg-yellow-600"
                     >
-                        {isPending ? "Salvando..." : "Sim, marcar como pendente"}
+                     {isPending ? "Excluindo..." : "Sim, deletar anotação."}   
                     </AlertDialogAction>
                 </AlertDialogFooter>
             </AlertDialogContent>

@@ -1,5 +1,8 @@
 import { ConfirmDeleteSubjectDialog } from "@/components/confirm-delete-subject-dialog";
+import { ConfirmEditSubjectDialog } from "@/components/confirm-edit-subject-dialog";
 import { CreateSubjectDialog } from "@/components/create-subject-dialog";
+import { DashboardHeader } from "@/components/dashboard-header";
+import { SettingsDropdown } from "@/components/settings-dropdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
@@ -21,14 +24,18 @@ export function Dashboard() {
 
     return (
       <div className="max-w-6xl mx-auto px-4 py-10 ">
-        <h1 className="text-3xl font-bold mb-6 text-center">Suas matérias</h1>
+        
+        <DashboardHeader />
+        
+          <h1 className="text-3xl text-center font-semibold mb-6 mt-6">Suas <span className="">Matérias</span></h1>
+        
         <CreateSubjectDialog />
 
         {subjects && subjects.length > 0 ? (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
             {subjects.map((subject, i) => (
-              <Card key={i} className="rounded-2xl shadow-md hover:shadow-lg transition cursor-pointer">
-                <CardContent className="p-6 space-y-2">
+              <Card key={i} className="rounded-2xl min-h-[240px] shadow-md hover:shadow-lg transition cursor-pointer" >
+                <CardContent className="p-6 flex flex-col justify-between h-full">
                   <h2 className="text-xl font-semibold">{subject.name}</h2>
                   <p className="text-sm text-muted-foreground">{subject.description}</p>
 
@@ -40,11 +47,9 @@ export function Dashboard() {
                       📝 {subject.notes.length} anotação{subject.notes.length > 1 ? "(s)" : ""}
                     </Badge>
                   </div>
-                  <div className="flex flex-row justify-between">
+                  <div className="flex flex-row justify-between mt-2">
                     <div className="flex flex-row gap-2">
-                      <Button className="bg-amber-400 cursor-pointer hover:bg-amber-500">
-                        Editar
-                      </Button>
+                      <ConfirmEditSubjectDialog subject={subject} subjectId={subject.id} /> 
                       <ConfirmDeleteSubjectDialog subjectId={subject.id} />
                     </div>
                     <div>
