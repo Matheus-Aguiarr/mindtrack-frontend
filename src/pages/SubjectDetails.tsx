@@ -8,6 +8,9 @@ import { CreateGoalDialog } from "@/components/create-goal-dialog";
 import { CreateNoteDialog } from "@/components/create-note-dialog";
 import { ArrowLeft } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { ConfirmMarkDoneDialog } from "@/components/confirm-mark-done-dialog";
+import { ConfirmDeleteGoalDialog } from "@/components/confirm-delete-goal-dialog";
+import { ConfirmPedingGoalDialog } from "@/components/confirm-pending-goal-dialog";
 
 export function SubjectDetails() {
     const { id } = useParams(); // pega o id dos parametros
@@ -15,12 +18,26 @@ export function SubjectDetails() {
     const { data: subject, isLoading, error} = useGetSubjectById(numericId); 
     const navigate = useNavigate();
 
+
     if (isLoading) { 
         return ( 
             <div className="mx-w-4xl mx-auto px-4 mt-10 space-y-4"> 
-                <Skeleton className="h-10 w-1/2" />
-                <Skeleton className="h-6 w-full" /> 
-                <Skeleton className="h-32 w-full" /> 
+                <Skeleton className="h-10 w-[250px] m-auto mb-2" />
+                <Skeleton className="h-6 w-[300px] m-auto mb-10" /> 
+                <Separator />
+                <div className="flex flex-row m-auto w-1/2 justify-between">
+                    <Skeleton className="h-10 w-[250px]" />
+                    <Skeleton className="h-10 w-[200px]"/> 
+                </div> 
+                <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3 w-1/2 m-auto mb-10">
+                    <Skeleton className="h-40 mt-4 w-64 rounded-2xl  " />
+                </div>
+                <Separator />
+                <div className="flex flex-row m-auto w-1/2 justify-between">
+                    <Skeleton className="h-10 w-[250px]" />
+                    <Skeleton className="h-10 w-[200px]"/> 
+                </div> 
+                <Skeleton />
             </div>
         )
     }
@@ -69,7 +86,7 @@ export function SubjectDetails() {
                 ) : ( 
                     <div className="grid gap-4 sm:grid-cols-2 md:grid-cols-3"> 
                         {subject.goals.map((goal) => ( 
-                            <Card key={goal.id} className="rounded-2xl">
+                            <Card key={goal.id} className="rounded-2xl p-0.5">
                                 <CardContent className="p-4 space-y-1">
                                     <h3 className="font-semibold text-lg">
                                         {goal.title}
@@ -77,25 +94,23 @@ export function SubjectDetails() {
                                     <p className="text-sm text-muted-foreground">
                                         {goal.description}
                                     </p>
-                                    <Badge variant={goal.done ? "default" : "outline"} className="mt-2">
+                                    <Badge variant={"outline"} className="mt-2">
                                         {goal.done ? "Concluído ✅" : "Pendente ⏳"}
                                     </Badge>
-                                    <p className="text-xs text-right text-muted-foreground">
-                                        até {goal.deadline}
-                                    </p>
-                                    {goal.done ? ( 
-                                        <Button className="bg-amber-500 hover:bg-amber-600">
-                                            Pendente
-                                        </Button>
-                                    ) : ( 
-                                    <Button className="bg-green-400 hover:bg-green-500 cursor-pointer mr-2">
-                                        Feito
-                                    </Button>
-
-                                    )}
-                                    <Button className="cursor-pointer bg-red-400 hover:bg-red-500">
-                                        Excluir
-                                    </Button>
+                                    
+                                    <div className="flex flex-row items-center justify-between mt-5">
+                                        <div>
+                                            {goal.done ? (
+                                                <ConfirmPedingGoalDialog goalId={goal.id} subjectId={subject.id} />
+                                            ) : (
+                                                <ConfirmMarkDoneDialog goalId={goal.id}  subjectId={subject.id}/>
+                                            )}
+                                            <ConfirmDeleteGoalDialog goalId={goal.id} subejctId={subject.id} />
+                                        </div>
+                                        <p className="text-xs text-right text-muted-foreground">
+                                            até {goal.deadline}
+                                        </p>
+                                    </div>
                                 </CardContent>
                             </Card>
                         ))}
