@@ -9,7 +9,7 @@ export function useGetSubjectById(id: number | undefined) {
         queryFn: async () => { 
             console.log("Reexecutando a query do subject", id);
             
-            const response = await authFetch(`http://localhost:8080/subject/${id}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/subject/${id}`, {
                 method: "GET"
             }); 
             if (!response.ok) {

@@ -15,7 +15,7 @@ export function useCreateGoal() {
     return useMutation({ 
         mutationKey: ["post-goal"], 
         mutationFn: async (data: CreateGoalData) => { 
-            const response = await authFetch("http://localhost:8080/goal", { 
+            const response = await authFetch("https://mindtrack-service.onrender.com/goal", { 
                 method: "POST", 
                 body: JSON.stringify(data), 
             }); 

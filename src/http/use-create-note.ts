@@ -13,7 +13,7 @@ export function useCreateNote() {
     return useMutation({ 
         mutationKey: ["post-note"], 
         mutationFn: async (data: CreateNoteData) => {
-            const response = await authFetch("http://localhost:8080/note", {
+            const response = await authFetch("https://mindtrack-service.onrender.com/note", {
                 method: "POST", 
                 body: JSON.stringify(data), 
             })

@@ -5,7 +5,7 @@ export function useAuthLogin() {
     return useMutation({
         mutationKey: ['post-login'], 
         mutationFn: async (data: LoginData) => {
-            const response = await fetch('http://localhost:8080/auth/login', {
+            const response = await fetch('https://mindtrack-service.onrender.com/auth/login', {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json', 

@@ -7,7 +7,7 @@ export function useMarkPedingGoal(goalId: number | undefined, subjectId: number 
     return useMutation({ 
         mutationKey: ['pending-goal', goalId], 
         mutationFn: async() => {
-            const response = await authFetch(`http://localhost:8080/goal/pending/${goalId}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/goal/pending/${goalId}`, {
                 method: "PUT"
             }); 
 

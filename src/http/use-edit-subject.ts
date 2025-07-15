@@ -12,7 +12,7 @@ export function useEditSubject(subjectId: number | undefined) {
         mutationKey: ['edit-subject', subjectId], 
         mutationFn: async(data: editSubjectData) => {
             
-            const response = await authFetch(`http://localhost:8080/subject/${subjectId}`, { 
+            const response = await authFetch(`https://mindtrack-service.onrender.com/subject/${subjectId}`, { 
                 method: "PUT", 
                 body: JSON.stringify(data), 
             })

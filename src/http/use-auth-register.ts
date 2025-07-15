@@ -5,7 +5,7 @@ export function useAuthRegister() {
     return useMutation({
         mutationKey: ['post-register'], 
         mutationFn: async (data: RegisterData) => {
-            const response = await fetch('http://localhost:8080/auth/register', {
+            const response = await fetch('https://mindtrack-service.onrender.com/auth/register', {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json', 

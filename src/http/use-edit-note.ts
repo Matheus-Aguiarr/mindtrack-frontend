@@ -8,7 +8,7 @@ export function useEditNote(noteId: number | undefined, subjectId: number | unde
     return useMutation({
         mutationKey: ["edit-note", noteId], 
         mutationFn: async(data: EditNoteData) => { 
-            const response = await authFetch(`http://localhost:8080/note/${noteId}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/note/${noteId}`, {
                 method: "PUT", 
                 body: JSON.stringify(data)
             })

@@ -6,7 +6,7 @@ export function useDeleteSubject(subjectId: number | undefined) {
     return useMutation({
         mutationKey: ['delete-subject', subjectId], 
         mutationFn: async () => {
-            const response = await authFetch(`http://localhost:8080/subject/${subjectId}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/subject/${subjectId}`, {
                 method: "DELETE"
             }); 
 

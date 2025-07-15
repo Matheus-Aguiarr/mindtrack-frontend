@@ -8,7 +8,7 @@ export function useGetSubjects() {
     return useQuery<SubjectData[]>({
         queryKey: ["get-subjects"], 
         queryFn: async () => {
-            const response = await authFetch("http://localhost:8080/subject/user", {
+            const response = await authFetch("https://mindtrack-service.onrender.com/subject/user", {
                 method: "GET",
             });
             

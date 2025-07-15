@@ -12,7 +12,7 @@ export function useCreateSubject() {
     return useMutation({ 
         mutationKey: ["post-subject"], 
         mutationFn: async(data: CreateSubjectData) => {
-            const response = await authFetch("http://localhost:8080/subject", { 
+            const response = await authFetch("https://mindtrack-service.onrender.com/subject", { 
                 method: "POST", 
                 body: JSON.stringify(data), 
             }); 

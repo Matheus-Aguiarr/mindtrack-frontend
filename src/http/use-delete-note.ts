@@ -6,7 +6,7 @@ export function useDeleteNote(noteId: number | undefined, subjectId: number | un
     return useMutation({ 
         mutationKey: ['delete-note', noteId], 
         mutationFn: async() => {
-            const response = await authFetch(`http://localhost:8080/note/${noteId}`, { 
+            const response = await authFetch(`https://mindtrack-service.onrender.com/note/${noteId}`, { 
                 method: "DELETE"
             })
 

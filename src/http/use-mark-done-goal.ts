@@ -7,7 +7,7 @@ export function useMarkDoneGoal(id: number | undefined, subjectId: number | unde
     return useMutation({
         mutationKey: ["done-goal", id], 
         mutationFn: async() => {
-            const response = await authFetch(`http://localhost:8080/goal/done/${id}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/goal/done/${id}`, {
                 method: "PUT"
             });
 

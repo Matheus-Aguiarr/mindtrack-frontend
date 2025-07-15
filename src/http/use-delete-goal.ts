@@ -7,7 +7,7 @@ export function useDeleteGoal(goalId: number | undefined, subjectId: number | un
     return useMutation({
         mutationKey: ["delete-goal", goalId], 
         mutationFn: async () => {
-            const response = await authFetch(`http://localhost:8080/goal/${goalId}`, {
+            const response = await authFetch(`https://mindtrack-service.onrender.com/goal/${goalId}`, {
                 method: "DELETE"
             })
 
