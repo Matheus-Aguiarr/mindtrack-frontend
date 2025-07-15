@@ -1,5 +1,4 @@
 import { useNavigate } from "react-router-dom"
-import logo from "@/assets/logo-mindtrack.png"
 import { Button } from "./ui/button";
 import { LogOut} from "lucide-react";
 import { SettingsDropdown } from "./settings-dropdown";

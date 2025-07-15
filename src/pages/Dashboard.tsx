@@ -2,7 +2,6 @@ import { ConfirmDeleteSubjectDialog } from "@/components/confirm-delete-subject-
 import { ConfirmEditSubjectDialog } from "@/components/confirm-edit-subject-dialog";
 import { CreateSubjectDialog } from "@/components/create-subject-dialog";
 import { DashboardHeader } from "@/components/dashboard-header";
-import { SettingsDropdown } from "@/components/settings-dropdown";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";

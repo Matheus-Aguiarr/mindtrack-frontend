@@ -10,7 +10,6 @@ import { ArrowLeft } from "lucide-react";
 import { ConfirmMarkDoneDialog } from "@/components/confirm-mark-done-dialog";
 import { ConfirmDeleteGoalDialog } from "@/components/confirm-delete-goal-dialog";
 import { ConfirmPedingGoalDialog } from "@/components/confirm-pending-goal-dialog";
-import { Button } from "@/components/ui/button";
 import { ConfirmEditNoteDialog } from "@/components/confirm-edit-note-dialog";
 import { ConfirmDeleteNoteDialog } from "@/components/confirm-delete-note-dialog";
 
