@@ -12,8 +12,17 @@ import { useState } from 'react';
 
 const schema = z.object({
     login: z.string(), 
-    password: z.string(), 
-})
+    password: z.string()
+        .min(6)
+        .regex(
+            /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*()_+\-=[\]{};':"\\|,.<>/?]).+$/,
+            'A senha deve conter: letra maiúscula, letra minúscula, número e caractere especial.'
+        ),
+    confirmation: z.string()
+}).refine((data) => data.password === data.confirmation, {
+    message: "As senhas não conferem",
+    path: ["confirmation"]
+});
 
 type FormData = z.infer<typeof schema>; 
 
@@ -62,13 +71,30 @@ export function RegisterForm() {
                 {...register("password")} 
                 icon={<KeyRoundIcon size={16}/>}
                 iconRight={
-                    <button onClick={toggleShowPassword} tabIndex={-1} className='cursor-pointer p-2'>
+                    <button type='button' onClick={toggleShowPassword} tabIndex={-1} className='cursor-pointer p-2'>
                         {showPassword ? <EyeOff size={18} /> : <Eye size={18}/>}
                     </button>
                 }
                 placeholder='Senha'
             />
                 {errors.password && <p className='text-sm text-red-500'>{errors.password.message}</p>}
+            </div>
+
+            <div>
+                <Label htmlFor='confirmation' className='p-1'>Confirme a senha</Label>
+                <InputWithIcon 
+                id='confirmation' 
+                type={showPassword ? 'text' : 'password'} 
+                {...register("confirmation")} 
+                icon={<KeyRoundIcon size={16}/>}
+                iconRight={
+                    <button type='button' onClick={toggleShowPassword} tabIndex={-1} className='cursor-pointer p-2'>
+                        {showPassword ? <EyeOff size={18} /> : <Eye size={18}/>}
+                    </button>
+                }
+                placeholder='Senha'
+            />
+                {errors.confirmation && <p className='text-sm text-red-500'>{errors.confirmation.message}</p>}
             </div>
 
             {error && <p className='text-sm text-red-500'>{error.message}</p>}
